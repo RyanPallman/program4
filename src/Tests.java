@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Tests {
@@ -7,7 +10,11 @@ public class Tests {
         ChangeCalculator cc = new ChangeCalculator();
         int[] arr = {};
         int change = 1;
-        Exception e = assertThrows(IllegalArgumentException.class, () -> {cc.getChange(arr, change);});
+        int[] minimumCoins = new int[change + 1];
+        int[] coinsUsed = new int[change + 1];
+        Exception e = assertThrows(IllegalArgumentException.class, () -> {
+            cc.getChange(arr, change, minimumCoins, coinsUsed);
+        });
         assertEquals("Invalid coin array.", e.getMessage());
     }
 
@@ -16,16 +23,21 @@ public class Tests {
         ChangeCalculator cc = new ChangeCalculator();
         int[] arr = {1, 5, 10, 25};
         int change = 42;
-        int[] expectedArr = new int[]{25,10,5,1,1};
+        int[] expectedArr = new int[]{1, 1, 5, 10, 25};
         int[] result;
+        int[] minimumCoins = new int[change + 1];
+        int[] coinsUsed = new int[change + 1];
         try {
-            result = cc.getChange(arr, change);
+            result = cc.getChange(arr, change, minimumCoins, coinsUsed);
         }
         catch(Exception e) {
             System.out.println(e.getMessage());
             result = new int[]{0,1,2,3,4};
         }
-        assertArrayEquals(expectedArr, result);
+        int[] changeArray = cc.getChangeArray(coinsUsed, change);
+        System.out.println("Test 1: " + Arrays.toString(cc.getChangeArray(coinsUsed, change)));
+        assertEquals(result[change], 5);
+        assertArrayEquals(expectedArr, changeArray);
     }
 
     @Test
@@ -35,12 +47,17 @@ public class Tests {
         int change = 5;
         int[] expectedArr = new int[]{1,1,1,1,1};
         int[] result;
+        int[] minimumCoins = new int[change + 1];
+        int[] coinsUsed = new int[change + 1];
         try {
-            result = cc.getChange(arr, change);
+            result = cc.getChange(arr, change, minimumCoins, coinsUsed);
         } catch (Exception e) {
             result = new int[0];
         }
-        assertArrayEquals(expectedArr, result);
+        int[] changeArray = cc.getChangeArray(coinsUsed, change);
+        System.out.println("Test 2: " + Arrays.toString(cc.getChangeArray(coinsUsed, change)));
+        assertEquals(result[change], 5);
+        assertArrayEquals(expectedArr, changeArray);
     }
 
     @Test
@@ -50,12 +67,17 @@ public class Tests {
         int change = 5;
         int[] expectedArr = new int[]{5};
         int[] result;
+        int[] minimumCoins = new int[change + 1];
+        int[] coinsUsed = new int[change + 1];
         try {
-            result = cc.getChange(arr, change);
+            result = cc.getChange(arr, change, minimumCoins, coinsUsed);
         } catch (Exception e) {
             result = new int[0];
         }
-        assertArrayEquals(expectedArr, result);
+        int[] changeArray = cc.getChangeArray(coinsUsed, change);
+        System.out.println("Test 3: " + Arrays.toString(cc.getChangeArray(coinsUsed, change)));
+        assertEquals(result[change], 1);
+        assertArrayEquals(expectedArr, changeArray);
     }
 
     @Test
@@ -65,11 +87,16 @@ public class Tests {
         int change = 9;
         int[] expectedArr = new int[]{1,4,4};
         int[] result;
+        int[] minimumCoins = new int[change + 1];
+        int[] coinsUsed = new int[change + 1];
         try {
-            result = cc.getChange(arr, change);
+            result = cc.getChange(arr, change, minimumCoins, coinsUsed);
         } catch (Exception e) {
             result = new int[0];
         }
-        assertArrayEquals(expectedArr, result);
+        int[] changeArray = cc.getChangeArray(coinsUsed, change);
+        System.out.println("Test 4: " + Arrays.toString(cc.getChangeArray(coinsUsed, change)));
+        assertEquals(result[change], 3);
+        assertArrayEquals(expectedArr, changeArray);
     }
 }
