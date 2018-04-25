@@ -1,3 +1,9 @@
+/*
+ * Authors: Ryan Pallman & Ethan Mitchell &
+ * Date: 4/24/2018
+ * Overview: Uses dynamic programming to calculate change.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 

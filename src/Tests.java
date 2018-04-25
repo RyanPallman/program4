@@ -1,3 +1,9 @@
+/*
+ * Authors: Ryan Pallman & Ethan Mitchell &
+ * Date: 4/24/2018
+ * Overview: Tests the implementation of dynamic programming.
+ */
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -29,8 +35,7 @@ public class Tests {
         int[] coinsUsed = new int[change + 1];
         try {
             result = cc.getChange(arr, change, minimumCoins, coinsUsed);
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             System.out.println(e.getMessage());
             result = new int[]{0,1,2,3,4};
         }
